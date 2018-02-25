@@ -30,7 +30,7 @@ namespace datasharp.Lists
 
         public void Resize(ref T[] array, int newSize) {
             T[] newCollection = new T[newSize];
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < size; i++)
             {
                 newCollection[i] = array[i];
             }
