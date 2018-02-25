@@ -74,6 +74,44 @@ namespace datasharp.Lists
             return repr.ToString();
         }
 
+        public void Sort() {
+            // uses QuickSort algorithm
+            QuickSort(collection, 0, size);
+        }
+
+        private void QuickSort(T[] arr, int lo, int hi) {
+            if (arr.Length < 2) {
+                return;
+            }
+            if (lo < hi) {
+                var p = Partition(arr, lo, hi);
+                QuickSort(arr, lo, p - 1);
+                QuickSort(arr, p + 1, hi);
+            }
+        }
+
+        private int Partition(T[] arr, int lo, int hi) {
+            Comparer<T> comparer = Comparer<T>.Default;
+            var pivot = arr[hi];  // common practice last el as pivot
+            int i = lo - 1;
+            for (int j = lo; j < hi - 1; j++)
+            {
+                var jEl = arr[j];
+                if (comparer.Compare(arr[j], pivot) < 0) {
+                    i = i + 1;
+                    var temp2 = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp2;
+                } else if (comparer.Compare(arr[j], pivot) == 0) {
+                    i += 1;
+                }
+            }
+            var temp = arr[i + 1];
+            arr[i + 1] = arr[hi];
+            arr[hi] = temp;
+            return i + 1;
+        }
+
     }
 
 }
