@@ -1,5 +1,4 @@
 ﻿using System;
-using static Utils.Utils;
 using datasharp.Lists;
 
 namespace datasharp
@@ -14,6 +13,19 @@ namespace datasharp
             arr.Add(2);
             arr.Add(3);
             arr.Add(1);
+
+            System.Console.WriteLine(arr);
+
+            System.Console.WriteLine(arr.Search(3));
+            System.Console.WriteLine(arr.Search(4));
+
+            arr.Remove(2);
+            System.Console.WriteLine(arr);
+
+            arr.Remove(5);
+            arr.Remove(3);
+            arr.Remove(1);
+            arr.Remove(2);
         }
     }
 }
