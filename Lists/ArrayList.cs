@@ -1,9 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-// Todo:
-// Insert
-// Search
-// Delete
 
 namespace datasharp.Lists
 {
@@ -36,6 +34,44 @@ namespace datasharp.Lists
             }
             array = newCollection;
             newCollection = null;
+        }
+
+        public int Search(T item) {
+            EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+
+            for (int i = 0; i < size; ++i)
+            {
+                if (comparer.Equals(collection[i], item)) return i;
+            }
+            return -1;
+        }
+
+        public bool Remove(T item)
+        {
+            int indexToRemove = Search(item);
+            if (indexToRemove >= 0) {
+                RemoveAt(indexToRemove);
+                return true;
+            }
+            return false;
+        }
+
+        public void RemoveAt(int index) {
+            for (int i = index; i < size - 1; i++)
+            {
+                collection[i] = collection[i+1];
+            }
+            size--;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder repr = new StringBuilder();
+            for (int i = 0; i < size; i++)
+            {
+                repr.Append(String.Format(" {0}", collection[i].ToString()));
+            }
+            return repr.ToString();
         }
 
     }
