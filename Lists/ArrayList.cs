@@ -116,7 +116,7 @@ namespace datasharp.Lists
             int j = right;
             T pivot = arr[left + (right - left) / 2];
             Comparer<T> comparer = Comparer<T>.Default;
-            
+
             while (i <= j) {
                 while (comparer.Compare(arr[i], pivot) < 0) i++;
                 while (comparer.Compare(arr[j], pivot) > 0) j--;
@@ -145,6 +145,29 @@ namespace datasharp.Lists
                 arr.Collection[i] = arr.collection[arr.Length - 1 - i];
                 arr.Collection[arr.Length - 1 - i] = temp;
             }
+        }
+
+        public static ArrayList<T> Merge(ArrayList<T> arr1, ArrayList<T> arr2) {
+            ArrayList<T> arr3 = new ArrayList<T>(arr1.Length + arr2.Length);
+            int arr1Bound = arr1.Length;
+            int arr2Bound = arr2.Length;
+            int i = 0, j = 0, k = 0;
+            Comparer<T> comparer = Comparer<T>.Default;
+
+            while (i < arr1Bound && j < arr2Bound) {
+                if (comparer.Compare(arr1.Collection[i], arr2.Collection[j]) < 0) {
+                    arr3.AddAt(arr1.Collection[i++], k++);
+                } else {
+                    arr3.AddAt(arr2.Collection[j++], k++);
+                }
+            }
+
+            while (i < arr1Bound)
+                arr3.AddAt(arr1.Collection[i++], k++);
+            while (j < arr2Bound)
+                arr3.AddAt(arr2.Collection[j++], k++);
+
+            return arr3;
         }
 
     }
