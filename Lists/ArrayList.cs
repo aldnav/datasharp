@@ -37,11 +37,30 @@ namespace datasharp.Lists
         }
 
         public int Search(T item) {
+            // return LinearSearch(collection, item, size);
+            return BinarySearch(collection, item, 0, size - 1);
+        }
+
+        private int BinarySearch(T[] arr, T item, int lo, int hi) {
+            if (hi < lo) {
+                return -1;
+            }
+            int pivot = (hi + lo) / 2;
+            Comparer<T> comparer = Comparer<T>.Default;
+            if (comparer.Compare(arr[pivot], item) > 0) {
+                return BinarySearch(arr, item, lo, pivot - 1);
+            } else if (comparer.Compare(arr[pivot], item) < 0) {
+                return BinarySearch(arr, item, pivot + 1, hi);
+            }
+            return pivot;
+        }
+
+        private int LinearSearch(T[] arr, T item, int size) {
             EqualityComparer<T> comparer = EqualityComparer<T>.Default;
 
             for (int i = 0; i < size; ++i)
             {
-                if (comparer.Equals(collection[i], item)) return i;
+                if (comparer.Equals(arr[i], item)) return i;
             }
             return -1;
         }
