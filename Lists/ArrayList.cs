@@ -125,6 +125,19 @@ namespace datasharp.Lists
             if (i < right) QuickSort(arr, i, right);
         }
 
+        public int Length { get => size; }
+        public T[] Collection { get => collection; set => collection = value; }
+
+        public static void Reverse(ArrayList<T> arr)
+        {
+            for (int i = 0; i < arr.Length / 2; i++)
+            {
+                var temp = arr.Collection[i];
+                arr.Collection[i] = arr.collection[arr.Length - 1 - i];
+                arr.Collection[arr.Length - 1 - i] = temp;
+            }
+        }
+
     }
 
 }
