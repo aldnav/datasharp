@@ -26,6 +26,15 @@ namespace datasharp.Lists
             collection[size++] = item;
         }
 
+        public void AddAt(T item, int index) {
+            if (index < 0 || index > size + 1) {
+                return;
+            }
+
+            collection[index] = item;
+            size++;
+        }
+
         public void Resize(ref T[] array, int newSize) {
             T[] newCollection = new T[newSize];
             for (int i = 0; i < size; i++)
