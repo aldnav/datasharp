@@ -15,7 +15,7 @@ namespace datasharp.Lists
 
         public ArrayList(int capacity) {
             collection = new T[capacity];
-            size = 0;
+            size = capacity;
         }
 
         public void Add(T item) {
@@ -31,8 +31,11 @@ namespace datasharp.Lists
                 return;
             }
 
+            if (size == collection.Length) {
+                Resize(ref collection, size + 1);
+            }
+
             collection[index] = item;
-            size++;
         }
 
         public void Resize(ref T[] array, int newSize) {
